@@ -1,36 +1,28 @@
 package tree
 
 import (
-	"sort"
-	"strings"
+	"path/filepath"
+
+	"github.com/qdm12/gotree/internal/directory"
 )
 
 type Tree interface {
-	ToLines() (lines []string)
+	Lines() (lines []string)
 }
 
 type tree struct {
-	directoryPaths []string
-	filePaths      []string
+	root directory.Directory
 }
 
-func New(directoryPaths, filePaths []string) Tree {
+func New(rootPath string, directoryPaths, filePaths []string) Tree {
+	rootPath, err := filepath.Abs(rootPath)
+	if err != nil {
+		panic(err)
+	}
+	directoryPaths = uniqueCleanPaths(directoryPaths, rootPath)
+	filePaths = uniqueCleanPaths(filePaths, rootPath)
+	root := buildTree(rootPath, directoryPaths, filePaths)
 	return &tree{
-		directoryPaths: sanitizePaths(directoryPaths),
-		filePaths:      sanitizePaths(filePaths),
+		root: root,
 	}
-}
-
-func sanitizePaths(paths []string) []string {
-	// sort them alphabetically
-	sort.Slice(paths, func(i, j int) bool {
-		return paths[i] < paths[j]
-	})
-
-	// remove the trailing slash
-	for i := range paths {
-		paths[i] = strings.TrimSuffix(paths[i], "/")
-	}
-
-	return paths
 }

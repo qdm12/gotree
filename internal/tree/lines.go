@@ -1,5 +1,5 @@
 package tree
 
-func (t *tree) ToLines() (lines []string) {
-	return []string{}
+func (t *tree) Lines() (lines []string) {
+	return t.root.Lines()
 }
