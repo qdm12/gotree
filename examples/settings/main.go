@@ -29,17 +29,19 @@ type ServerSettings struct {
 }
 
 func (s Settings) String() string {
-	root := gotree.New("Settings:")
-	_ = root.Appendf("Log level: %d", s.LogLevel)
-	serverSettings := s.Server.toNode()
-	root.AppendNode(serverSettings)
-	lines := root.ToLines()
-	return strings.Join(lines, "\n")
+	return strings.Join(s.toNode().ToLines(), "\n")
+}
+
+func (s Settings) toNode() *gotree.Node {
+	node := gotree.New("Settings:")
+	node.Appendf("Log level: %d", s.LogLevel)
+	node.AppendNode(s.Server.toNode())
+	return node
 }
 
 func (s ServerSettings) toNode() *gotree.Node {
-	root := gotree.New("Server settings:")
-	root.Appendf("Address: %s", s.Address)
-	root.Appendf("Debug: %t", s.Debug)
-	return root
+	node := gotree.New("Server settings:")
+	node.Appendf("Address: %s", s.Address)
+	node.Appendf("Debug: %t", s.Debug)
+	return node
 }

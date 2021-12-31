@@ -38,21 +38,33 @@ type ServerSettings struct {
 }
 
 func (s Settings) String() string {
-    root := gotree.NewRoot("Settings:")
-    _ = root.Appendf("Log level: %d", s.LogLevel)
-    serverSettings := s.Server.toNode()
-    root.AppendNode(serverSettings)
-    lines := root.ToLines()
-    return strings.Join(lines, "\n")
+    return strings.Join(s.toNode().ToLines(), "\n")
+}
+
+func (s Settings) toNode() *gotree.Node {
+    node := gotree.New("Settings:")
+    node.Appendf("Log level: %d", s.LogLevel)
+    node.AppendNode(s.Server.toNode())
+    return node
 }
 
 func (s ServerSettings) toNode() *gotree.Node {
-    root := gotree.NewRoot("Server settings:")
-    root.Appendf("Address: %s", s.Address)
-    root.Appendf("Debug: %t", s.Debug)
-    return root
+    node := gotree.New("Server settings:")
+    node.Appendf("Address: %s", s.Address)
+    node.Appendf("Debug: %t", s.Debug)
+    return node
 }
 
+```
+
+Will print out
+
+```s
+Settings:
+├── Log level: 2
+└── Server settings:
+    ├── Address: :8000
+    └── Debug: true
 ```
 
 See the [examples](examples) directory for more cases.
