@@ -8,7 +8,7 @@ import (
 func Test_EndToEnd(t *testing.T) {
 	t.Parallel()
 
-	root := NewRoot("root")
+	root := New("root")
 
 	_ = root.Appendf("a")
 	nodeB := root.Appendf("b")

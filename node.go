@@ -7,7 +7,7 @@ type Node struct {
 	childs []*Node
 }
 
-func NewRoot(format string, args ...interface{}) *Node {
+func New(format string, args ...interface{}) *Node {
 	return &Node{
 		value: fmt.Sprintf(format, args...),
 	}

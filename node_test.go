@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_NewRoot(t *testing.T) {
+func Test_New(t *testing.T) {
 	t.Parallel()
 
 	testCases := map[string]struct {
@@ -29,7 +29,7 @@ func Test_NewRoot(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			root := NewRoot(testCase.value)
+			root := New(testCase.value)
 
 			if !reflect.DeepEqual(testCase.root, root) {
 				t.Errorf("actual result does not match expected result:\nActual:\n%#v\nExpected:\n%#v",
