@@ -2,7 +2,6 @@ package gotree
 
 import (
 	"reflect"
-	"strings"
 	"testing"
 )
 
@@ -241,14 +240,14 @@ func Test_Node_ToLines(t *testing.T) {
 	t.Parallel()
 
 	testCases := map[string]struct {
-		node  Node
-		lines []string
+		node Node
+		s    string
 	}{
 		"single node": {
 			node: Node{
 				value: "value",
 			},
-			lines: []string{"value"},
+			s: "value",
 		},
 		"node with children": {
 			node: Node{
@@ -261,12 +260,11 @@ func Test_Node_ToLines(t *testing.T) {
 					{value: "b"},
 				},
 			},
-			lines: []string{
-				"value",
-				"├── a",
-				"|   ├── c",
-				"|   └── d",
-				"└── b"},
+			s: `value
+├── a
+|   ├── c
+|   └── d
+└── b`,
 		},
 	}
 
@@ -275,14 +273,11 @@ func Test_Node_ToLines(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			lines := testCase.node.ToLines()
+			s := testCase.node.String()
 
-			expected := strings.Join(testCase.lines, "\n")
-			actual := strings.Join(lines, "\n")
-
-			if expected != actual {
+			if testCase.s != s {
 				t.Errorf("actual result does not match expected result:\nActual:\n%s\nExpected:\n%s",
-					actual, expected)
+					s, testCase.s)
 			}
 		})
 	}

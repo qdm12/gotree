@@ -1,7 +1,6 @@
 package gotree
 
 import (
-	"strings"
 	"testing"
 )
 
@@ -19,24 +18,18 @@ func Test_EndToEnd(t *testing.T) {
 	_ = nodeD.Appendf("p")
 	_ = nodeD.Appendf("z")
 
-	lines := root.ToLines()
+	const expected = `root
+├── a
+├── b
+|   └── x
+└── c
+    └── d
+        ├── p
+        └── z`
+	s := root.String() //nolint:ifshort
 
-	expectedLines := []string{
-		"root",
-		"├── a",
-		"├── b",
-		"|   └── x",
-		"└── c",
-		"    └── d",
-		"        ├── p",
-		"        └── z",
-	}
-
-	expected := strings.Join(expectedLines, "\n")
-	actual := strings.Join(lines, "\n")
-
-	if expected != actual {
+	if expected != s {
 		t.Errorf("actual result does not match expected result:\nActual:\n%s\nExpected:\n%s",
-			actual, expected)
+			s, expected)
 	}
 }

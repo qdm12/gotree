@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/qdm12/gotree"
 )
@@ -29,7 +28,7 @@ type ServerSettings struct {
 }
 
 func (s Settings) String() string {
-	return strings.Join(s.toNode().ToLines(), "\n")
+	return s.toNode().String()
 }
 
 func (s Settings) toNode() *gotree.Node {

@@ -1,6 +1,9 @@
 package gotree
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Node struct {
 	value  string
@@ -47,10 +50,11 @@ func (n *Node) AppendNode(node *Node) {
 	n.childs = append(n.childs, cp)
 }
 
-func (n *Node) ToLines() (lines []string) {
+func (n *Node) String() string {
 	const isRoot = true
 	const isLast = false
-	return toLines(n, isRoot, isLast)
+	lines := toLines(n, isRoot, isLast)
+	return strings.Join(lines, "\n")
 }
 
 func toLines(node *Node, isRoot, isLast bool) (lines []string) {
