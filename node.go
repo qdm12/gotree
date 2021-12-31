@@ -13,7 +13,7 @@ func New(format string, args ...interface{}) *Node {
 	}
 }
 
-func (n *Node) DeepCopy() *Node {
+func (n *Node) deepCopy() *Node {
 	nodeCopy := new(Node)
 	nodeCopy.value = n.value
 	if n.childs == nil {
@@ -21,7 +21,7 @@ func (n *Node) DeepCopy() *Node {
 	}
 	nodeCopy.childs = make([]*Node, len(n.childs))
 	for i := range n.childs {
-		nodeCopy.childs[i] = n.childs[i].DeepCopy()
+		nodeCopy.childs[i] = n.childs[i].deepCopy()
 	}
 	return nodeCopy
 }
@@ -37,7 +37,7 @@ func (n *Node) Appendf(format string, args ...interface{}) (newNode *Node) {
 }
 
 func (n *Node) AppendNode(node *Node) {
-	cp := node.DeepCopy()
+	cp := node.deepCopy()
 
 	n.childs = append(n.childs, cp)
 }

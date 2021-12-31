@@ -73,7 +73,7 @@ func Test_Node_DeepCopy(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			copied := testCase.original.DeepCopy()
+			copied := testCase.original.deepCopy()
 
 			if !reflect.DeepEqual(testCase.copied, copied) {
 				t.Errorf("actual result does not match expected result:\nActual:\n%#v\nExpected:\n%#v",
