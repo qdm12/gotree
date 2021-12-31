@@ -37,6 +37,11 @@ func (n *Node) Appendf(format string, args ...interface{}) (newNode *Node) {
 }
 
 func (n *Node) AppendNode(node *Node) {
+	if node == nil {
+		// do not append nil node
+		return
+	}
+
 	cp := node.deepCopy()
 
 	n.childs = append(n.childs, cp)
