@@ -51,6 +51,10 @@ func (n *Node) AppendNode(node *Node) {
 }
 
 func (n *Node) String() string {
+	if n == nil {
+		return ""
+	}
+
 	const isRoot = true
 	const isLast = false
 	lines := toLines(n, isRoot, isLast)

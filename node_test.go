@@ -236,13 +236,14 @@ func Test_Node_AppendNode(t *testing.T) {
 	}
 }
 
-func Test_Node_ToLines(t *testing.T) {
+func Test_Node_String(t *testing.T) {
 	t.Parallel()
 
 	testCases := map[string]struct {
 		node Node
 		s    string
 	}{
+		"nil node": {},
 		"single node": {
 			node: Node{
 				value: "value",
@@ -281,4 +282,18 @@ func Test_Node_ToLines(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("untyped nil node", func(t *testing.T) {
+		t.Parallel()
+
+		getNode := func() *Node {
+			return nil
+		}
+
+		s := getNode().String()
+
+		if s != "" {
+			t.Errorf("string is not empty: %s", s)
+		}
+	})
 }
