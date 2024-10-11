@@ -39,7 +39,7 @@ func (n *Node) Append(value string) (newNode *Node) {
 	return newNode
 }
 
-func (n *Node) Appendf(format string, args ...interface{}) (newNode *Node) {
+func (n *Node) Appendf(format string, args ...any) (newNode *Node) {
 	newNode = &Node{
 		value: fmt.Sprintf(format, args...),
 	}

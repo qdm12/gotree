@@ -172,14 +172,14 @@ func Test_Node_Appendf(t *testing.T) {
 	testCases := map[string]struct {
 		originalNode *Node
 		format       string
-		args         []interface{}
+		args         []any
 		newNode      *Node
 		expectedNode *Node
 	}{
 		"empty node": {
 			originalNode: &Node{},
 			format:       "%s %d",
-			args:         []interface{}{"hello", 1},
+			args:         []any{"hello", 1},
 			newNode: &Node{
 				value: "hello 1",
 			},
@@ -203,7 +203,7 @@ func Test_Node_Appendf(t *testing.T) {
 				},
 			},
 			format: "%s %d",
-			args:   []interface{}{"hello", 1},
+			args:   []any{"hello", 1},
 			newNode: &Node{
 				value: "hello 1",
 			},
