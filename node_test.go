@@ -93,6 +93,79 @@ func Test_Node_DeepCopy(t *testing.T) {
 	}
 }
 
+func Test_Node_Append(t *testing.T) {
+	t.Parallel()
+
+	testCases := map[string]struct {
+		originalNode *Node
+		value        string
+		newNode      *Node
+		expectedNode *Node
+	}{
+		"empty node": {
+			originalNode: &Node{},
+			value:        "hello",
+			newNode: &Node{
+				value: "hello",
+			},
+			expectedNode: &Node{
+				childs: []*Node{
+					{
+						value: "hello",
+					},
+				},
+			},
+		},
+		"node with children": {
+			originalNode: &Node{
+				childs: []*Node{
+					{
+						value: "A",
+					},
+					{
+						value: "B",
+					},
+				},
+			},
+			value: "hello",
+			newNode: &Node{
+				value: "hello",
+			},
+			expectedNode: &Node{
+				childs: []*Node{
+					{
+						value: "A",
+					},
+					{
+						value: "B",
+					},
+					{
+						value: "hello",
+					},
+				},
+			},
+		},
+	}
+
+	for name, testCase := range testCases {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			newNode := testCase.originalNode.Appendf(testCase.value)
+
+			if !reflect.DeepEqual(testCase.newNode, newNode) {
+				t.Errorf("actual new node does not match expected new node:\nActual:\n%#v\nExpected:\n%#v",
+					newNode, testCase.newNode)
+			}
+
+			if !reflect.DeepEqual(testCase.expectedNode, testCase.originalNode) {
+				t.Errorf("actual node does not match expected node:\nActual:\n%#v\nExpected:\n%#v",
+					testCase.originalNode, testCase.expectedNode)
+			}
+		})
+	}
+}
+
 func Test_Node_Appendf(t *testing.T) {
 	t.Parallel()
 

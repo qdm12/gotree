@@ -29,6 +29,16 @@ func (n *Node) deepCopy() *Node {
 	return nodeCopy
 }
 
+func (n *Node) Append(value string) (newNode *Node) {
+	newNode = &Node{
+		value: value,
+	}
+
+	n.childs = append(n.childs, newNode)
+
+	return newNode
+}
+
 func (n *Node) Appendf(format string, args ...interface{}) (newNode *Node) {
 	newNode = &Node{
 		value: fmt.Sprintf(format, args...),
