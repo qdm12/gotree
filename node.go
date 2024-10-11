@@ -10,9 +10,9 @@ type Node struct {
 	childs []*Node
 }
 
-func New(format string, args ...interface{}) *Node {
+func New(value string) *Node {
 	return &Node{
-		value: fmt.Sprintf(format, args...),
+		value: value,
 	}
 }
 
