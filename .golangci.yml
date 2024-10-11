@@ -7,25 +7,33 @@ issues:
     - path: _test\.go
       linters:
         - dupl
-        - maligned
-        - goerr113
+        - err113
 
 linters:
   disable-all: true
   enable:
+    - asasalint
     - asciicheck
     - bidichk
     - bodyclose
+    - canonicalheader
+    - containedctx
+    - copyloopvar
     - cyclop
+    - decorder
     - dogsled
     - dupl
+    - dupword
     - durationcheck
+    - err113
+    - errchkjson
     - errname
     - errorlint
     - exhaustive
-    - exportloopref
+    - fatcontext
     - forcetypeassert
     - gci
+    - gocheckcompilerdirectives
     - gochecknoglobals
     - gochecknoinits
     - gocognit
@@ -33,43 +41,47 @@ linters:
     - gocritic
     - gocyclo
     - godot
-    - goerr113
     - goheader
     - goimports
-    - gomnd
     - gomoddirectives
     - goprintffuncname
     - gosec
-    - ifshort
+    - gosmopolitan
+    - grouper
     - importas
+    - interfacebloat
+    - intrange
     - ireturn
     - lll
+    - maintidx
     - makezero
+    - mirror
     - misspell
+    - mnd
+    - musttag
     - nakedret
     - nestif
     - nilerr
     - nilnil
     - noctx
     - nolintlint
+    - nosprintfhostport
+    - paralleltest
     - prealloc
     - predeclared
-    - predeclared
     - promlinter
+    - reassign
     - revive
     - rowserrcheck
     - sqlclosecheck
+    - tagalign
     - tenv
     - thelper
     - tparallel
     - unconvert
     - unparam
     - varnamelen
+    - usestdlibvars
     - wastedassign
     - whitespace
-    - wrapcheck
-
-run:
-  skip-dirs:
-    - .devcontainer
-    - .github
+    - zerologlint
